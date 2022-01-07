@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\V1\ExpenseCategoryController;
 use App\Http\Controllers\V1\TestController;
 use App\Http\Controllers\V1\UserController;
+use App\Models\ExpenseCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -40,12 +42,16 @@ Route::group([
     'middleware'    => ['auth:sanctum']
 ],
 function(){
+
+        //*** USER */
         Route::get('/user/list', [UserController::class, 'index']);
         Route::post('/user/logout', [UserController::class, 'logout']);
 
+        //** Expense Category */
+        Route::get('category/list', [ExpenseCategoryController::class, 'index']);
+        Route::get('category/{id}', [ExpenseCategoryController::class, 'show']);
+        Route::post('category/', [ExpenseCategoryController::class, 'store']);
+        Route::put('category/{id}', [ExpenseCategoryController::class, 'update']);
 
-        Route::get('test2', function(){
-            return 'test v1';
-        });
 
 });
