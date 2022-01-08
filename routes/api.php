@@ -52,6 +52,7 @@ function(){
         Route::get('category/{id}', [ExpenseCategoryController::class, 'show']);
         Route::post('category/', [ExpenseCategoryController::class, 'store']);
         Route::put('category/{id}', [ExpenseCategoryController::class, 'update']);
+        Route::delete('category/{id}', [ExpenseCategoryController::class, 'destroy']);
 
 
 });
