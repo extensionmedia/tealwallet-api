@@ -16,19 +16,14 @@ class ExpenseCategoryController extends Controller
      */
     public function index()
     {
+        $collection = ExpenseCategory::orderBy('expense_category')->get();
+        $categories = $collection->filter(function($c){
+            $c->expense_total = $c->expenses->sum('amount');
+            return $c;
+        });
         return [
-            'expense_categories'    =>  ExpenseCategory::all()
+            'expense_categories'    =>  $categories
         ];
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -78,17 +73,6 @@ class ExpenseCategoryController extends Controller
         }
         return $category;
 
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     /**

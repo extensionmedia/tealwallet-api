@@ -1,10 +1,8 @@
 <?php
 
 use App\Http\Controllers\V1\ExpenseCategoryController;
-use App\Http\Controllers\V1\TestController;
+use App\Http\Controllers\V1\ExpenseController;
 use App\Http\Controllers\V1\UserController;
-use App\Models\ExpenseCategory;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -48,11 +46,10 @@ function(){
         Route::post('/user/logout', [UserController::class, 'logout']);
 
         //** Expense Category */
-        Route::get('category/list', [ExpenseCategoryController::class, 'index']);
-        Route::get('category/{id}', [ExpenseCategoryController::class, 'show']);
-        Route::post('category/', [ExpenseCategoryController::class, 'store']);
-        Route::put('category/{id}', [ExpenseCategoryController::class, 'update']);
-        Route::delete('category/{id}', [ExpenseCategoryController::class, 'destroy']);
+        Route::resource('category', ExpenseCategoryController::class)->except(['create', 'edit']);
+
+        //** Expense */
+        Route::resource('expense', ExpenseController::class)->except(['create', 'edit']);
 
 
 });

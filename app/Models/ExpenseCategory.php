@@ -16,4 +16,8 @@ class ExpenseCategory extends Model
         'is_budget',
         'budget_amount'
     ];
+
+    public function expenses(){
+        return $this->hasMany(Expense::class)->where('user_id', auth()->id())->orderBy('expense_date', 'desc');
+    }
 }
