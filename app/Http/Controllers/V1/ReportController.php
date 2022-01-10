@@ -18,7 +18,17 @@ class ReportController extends Controller
             $year = $params['year'];
             return $this->getTotalByYear($year);;
         }else{
-            return 'need to be done';
+            $thisYear = date('Y');
+            $date = auth()->user()->expenses()->orderBy('expense_date', 'asc')->pluck('expense_date')->first();
+
+            if(!$date) return [];
+            $d    = new DateTime($date);
+            $firstYear = $d->format('Y');
+            $report = [];
+            for($i=$firstYear; $i<=$thisYear; $i++){
+                $report[] = $this->getTotalByYear($i);
+            }
+            return $report;
         }
     }
 
