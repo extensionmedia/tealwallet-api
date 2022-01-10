@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\V1\ExpenseCategoryController;
 use App\Http\Controllers\V1\ExpenseController;
+use App\Http\Controllers\V1\ReportController;
 use App\Http\Controllers\V1\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -51,5 +52,7 @@ function(){
         //** Expense */
         Route::resource('expense', ExpenseController::class)->except(['create', 'edit']);
 
+        //** Report */
+        Route::get('report', [ReportController::class, 'totals']);
 
 });
